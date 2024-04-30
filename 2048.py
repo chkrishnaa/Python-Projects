@@ -72,12 +72,17 @@ class Game2048:
                                 self.grid[i][j] = 0
                                 self.score += self.grid[k - 1][j]
                                 moved = True
+                                self.update_grid()  # Update grid after merge
+                                self.update_score()  # Update score after merge
+                                self.master.after(10)  # Add delay for transition
                                 break
                             else:
                                 self.grid[k - 1][j] = self.grid[i][j]
                                 self.grid[i][j] = 0
                                 k -= 1
                                 moved = True
+                                self.update_grid()  # Update grid after move
+                                self.master.after(10)  # Add delay for transition
         elif direction == 'Down':
             for j in range(self.grid_size):
                 for i in range(self.grid_size - 2, -1, -1):
@@ -89,12 +94,17 @@ class Game2048:
                                 self.grid[i][j] = 0
                                 self.score += self.grid[k + 1][j]
                                 moved = True
+                                self.update_grid()  # Update grid after merge
+                                self.update_score()  # Update score after merge
+                                self.master.after(10)  # Add delay for transition
                                 break
                             else:
                                 self.grid[k + 1][j] = self.grid[i][j]
                                 self.grid[i][j] = 0
                                 k += 1
                                 moved = True
+                                self.update_grid()  # Update grid after move
+                                self.master.after(10)  # Add delay for transition
         elif direction == 'Left':
             for i in range(self.grid_size):
                 for j in range(1, self.grid_size):
@@ -106,12 +116,17 @@ class Game2048:
                                 self.grid[i][j] = 0
                                 self.score += self.grid[i][k - 1]
                                 moved = True
+                                self.update_grid()  # Update grid after merge
+                                self.update_score()  # Update score after merge
+                                self.master.after(10)  # Add delay for transition
                                 break
                             else:
                                 self.grid[i][k - 1] = self.grid[i][j]
                                 self.grid[i][j] = 0
                                 k -= 1
                                 moved = True
+                                self.update_grid()  # Update grid after move
+                                self.master.after(10)  # Add delay for transition
         elif direction == 'Right':
             for i in range(self.grid_size):
                 for j in range(self.grid_size - 2, -1, -1):
@@ -123,14 +138,20 @@ class Game2048:
                                 self.grid[i][j] = 0
                                 self.score += self.grid[i][k + 1]
                                 moved = True
+                                self.update_grid()  # Update grid after merge
+                                self.update_score()  # Update score after merge
+                                self.master.after(10)  # Add delay for transition
                                 break
                             else:
                                 self.grid[i][k + 1] = self.grid[i][j]
                                 self.grid[i][j] = 0
                                 k += 1
                                 moved = True
+                                self.update_grid()  # Update grid after move
+                                self.master.after(10)  # Add delay for transition
         if moved:
             self.move_tiles(direction)
+
 
     def check_game_over(self):
         for i in range(self.grid_size):
